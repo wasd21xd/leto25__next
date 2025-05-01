@@ -1,3 +1,148 @@
+@charset "UTF-8";
+/* Header.module.css */
+/* Определяем CSS переменные для цветов, если нужно для удобства */
+:root {
+  --gradient-start: #f5fde4;
+  --gradient-end: #ffffff;
+  --button-gradient-start: #8a54f1;
+  --button-gradient-end: #6f4fde;
+  --text-purple: #6a3aaf;
+  --highlight-purple: #5a2eae;
+  --text-gray: #a0a0a0;
+  --discount-text-gray: #555;
+  --bullet-gray: #a0a0a0;
+  --placeholder-image: url("https://via.placeholder.com/1920x400/cccccc/888888?text=Placeholder+Background+Image"); /* Замените на реальный URL */
+}
 
+.header {
+  background: linear-gradient(to right, var(--gradient-start), var(--gradient-end)); /* Примерный градиент фона без изображения */
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  padding: 40px 0; /* Вертикальные отступы */
+  font-family: Arial, sans-serif; /* Замените на нужный шрифт */
+  position: relative; /* Для позиционирования псевдо-элемента с фоном */
+  overflow: hidden; /* Чтобы псевдо-элемент не вылезал */
+}
+
+/* Псевдо-элемент для фонового изображения */
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Замените на URL вашего изображения */
+  background-image: var(--placeholder-image);
+  background-size: cover;
+  background-position: center left; /* Позиционирование изображения */
+  opacity: 0.2; /* Прозрачность фонового изображения */
+  z-index: 1; /* Под текстом */
+}
+
+.container {
+  max-width: 1920px; /* Ширина контейнера */
+  margin: 0 auto; /* Центрирование контейнера */
+  /* padding: 0 80px; /* Отступы по бокам контейнера (подберите значение) */
+  display: flex;
+  justify-content: space-between; /* Распределение колонок */
+  align-items: center; /* Вертикальное выравнивание */
+  position: relative; /* Чтобы контент был над псевдо-элементом ::before */
+  z-index: 2;
+  gap: 40px; /* Пространство между колонками */
+}
+
+.leftColumn {
+  flex: 1; /* Занимает доступное пространство */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Выравнивание элементов слева */
+}
+
+.ctaButton {
+  display: inline-block;
+  background: linear-gradient(to right, var(--button-gradient-start), var(--button-gradient-end)); /* Градиент кнопки */
+  color: white;
+  padding: 18px 45px; /* Внутренние отступы кнопки */
+  border-radius: 30px; /* Скругление углов */
+  font-size: 24px; /* Размер шрифта кнопки */
+  font-weight: bold; /* Жирность шрифта */
+  text-decoration: none; /* Убрать подчеркивание ссылки */
+  border: none; /* Убрать рамку */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Тень кнопки */
+  cursor: default; /* Убрать курсор по умолчанию для ссылок */
+  transition: transform 0.2s ease; /* Плавность для возможного ховера */
+}
+
+/* Если все же нужен ховер-эффект без смены курсора */
+/*
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+*/
+.discountText {
+  color: var(--discount-text-gray); /* Цвет текста под кнопкой */
+  font-size: 14px; /* Размер шрифта */
+  margin-top: 15px; /* Отступ сверху */
+}
+
+.rightColumn {
+  flex: 1; /* Занимает доступное пространство */
+  text-align: left; /* Выравнивание текста справа */
+}
+
+.mainHeading {
+  font-size: 56px; /* Размер основного заголовка (подберите значение) */
+  font-weight: bold; /* Жирность */
+  color: var(--text-purple); /* Фиолетовый цвет текста */
+  text-transform: uppercase; /* Все буквы заглавные */
+  line-height: 1.2; /* Межстрочный интервал */
+  margin: 0 0 20px 0; /* Убрать отступы по умолчанию и добавить нижний */
+}
+
+/* Стиль для span внутри .mainHeading */
+.mainHeading .highlight {
+  color: var(--highlight-purple); /* Более темный фиолетовый для Uchi.ru */
+  font-weight: 900; /* Более жирный, если нужно */
+}
+
+.subHeading {
+  font-size: 24px; /* Размер подзаголовка */
+  font-weight: bold;
+  color: var(--text-gray); /* Серый цвет текста */
+  text-transform: uppercase;
+  margin: 0 0 15px 0;
+}
+
+.featuresList {
+  list-style: none; /* Убрать стандартные маркеры */
+  padding: 0;
+  margin: 0;
+}
+
+.featureItem {
+  font-size: 18px; /* Размер шрифта пунктов списка */
+  color: var(--text-gray); /* Серый цвет текста */
+  text-transform: uppercase;
+  margin-bottom: 10px; /* Отступ между пунктами */
+  position: relative;
+  padding-left: 20px; /* Отступ слева для маркера */
+}
+
+/* Псевдо-элемент для создания квадратного маркера */
+.featureItem::before {
+  content: "";
+  display: inline-block;
+  width: 8px; /* Ширина маркера */
+  height: 8px; /* Высота маркера */
+  background-color: var(--bullet-gray); /* Цвет маркера */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); /* Вертикальное центрирование маркера */
+  /* border-radius: 2px; */ /* Если нужно слегка скруглить углы квадрата */
+}
 
 /*# sourceMappingURL=header.css.map */
